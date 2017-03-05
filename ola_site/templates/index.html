@@ -44,6 +44,9 @@
                 height: 200px;
                 overflow-y: scroll;
             }
+            footer {
+                height: 200px;
+            }
         </style>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -261,6 +264,14 @@
             {% endautoescape %}
         </div>
         </div>
+        <div class="jumbotron text-center">
+              <h3 >Meet us on github</h3>
+              {% load static %}
+              <a href="https://github.com/robert501128/ola"><img src="{% static "./githubIcon.png" %}" border="0"></a> 
+        </div>
+
+    </div>
+
     </body>
     
 </html>
