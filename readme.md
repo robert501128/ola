@@ -3,9 +3,11 @@ In this project we build our own programming language - OLA(OneLineArt), which u
 
 ![OLA] (https://github.com/robert501128/ola/blob/master/snapshot.png)
 
-## Usage
+## Compiler
+Compiler is in ola/ola_site/ola_compiler  
+
+## Basic Usage
 ```
-[comment]: # (comment test)
 $ ola/ola_site/ola_compiler/ make
 $ ola/ola_site/ola_compiler/ ./parser simplexpr.p
 $ ola/ola_site/ola_compiler/ java -jar jasmin-2.4/jasmin.jar simplexpr.j
