@@ -14,7 +14,4 @@ $ ola/ola_site/ola_compiler/ java -jar jasmin-2.4/jasmin.jar simplexpr.j
 ```
 ## Work
 
-## Compiler
-- compiler is in ola_site/ola_compiler  
-
 ## [Demo] (http://one-line-art.hk3msckhfw.us-west-2.elasticbeanstalk.com/index/)
