@@ -1,0 +1,266 @@
+<!-- hello_world.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>I come from template!!</title>
+        <style type="text/css" media="screen">
+            #editor { 
+                position: relative;
+                padding-top: 56%;
+            }
+            
+            #hello {
+              {% load static %}
+              background-image: url("{% static "./cutie2.jpg" %}");
+              background-size: 100%;           
+            }
+            div.jumbotron { 
+                background-color: transparent; 
+                color: #ffffff;
+            }
+            #text {
+              position: absolute;
+              color: white;
+              font-size: 72px;
+              font-weight: bold;
+              top:5%;
+               left: 3%;
+               bottom: 0;
+               right: 0;
+            }
+            #name {
+              position: absolute;
+              color: white;
+              font-size: 48px;
+              font-weight: bold;
+              top:70%;
+               left: 3%;
+               bottom: 0;
+               right: 0;
+            }
+            div.scroll {
+                background-color: grey;
+                height: 200px;
+                overflow-y: scroll;
+            }
+        </style>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    </head>
+    <body id="hello">
+    <div class="container">
+        <div class="jumbotron text-center">
+            <div class="page-header">
+            <h1> One Line Art (OLA) </h1>
+            <p> The Language Is Meant To Be Funny</p>
+            </div>
+        </div>
+    </div>
+        
+                    
+
+        <div class="container">
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ゝ")>ゝ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ʖ")>ʖ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("つ")>つ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ᖗ")>ᖗ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ᖘ")>ᖘ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ᕦ")>ᕦ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ᕥ")>ᕥ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("┏(＾0＾)┛")>┏(＾0＾)┛</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("┗(＾0＾)┓")>┗(＾0＾)┓</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("└|∵┌|")>└|∵┌|</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("|┐∵|┘")>|┐∵|┘</button>
+          </div>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("┌|*ﾟ-ﾟ|┘")>┌|*ﾟ-ﾟ|┘</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception1")>☜( ﾟ∀ﾟ☜)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(‘▿’ʃʃ")>(‘▿’ʃʃ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception3")>ᕙ། – ڡ – །─∈</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception4")>ᕙ། – ڡ – །ᕗ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception5")>3-། – ڡ – །ᕗ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ƪƪ’▿’)")>ƪƪ’▿’)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(๑￫‿￩๑)")>(๑￫‿￩๑)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception6")>‹(⁽˙́ʷ˙̀⁾ )∨( ⁽˙́ʷ˙̀⁾)›</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(v〃∇〃)ﾊ(〃∇〃v)")>(v〃∇〃)ﾊ(〃∇〃v)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception7")>⁄(⁄ ⁄•⁄-⁄•⁄ ⁄)⁄</button>
+          </div>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception8")><º))))><</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ʕ•ᴥ•ʔ")>ʕ•ᴥ•ʔ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("⊂((υ⊥υ))⊃")>⊂((υ⊥υ))⊃</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(=ↀωↀ=)")>(=ↀωↀ=)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception9")>／(≡・ x ・≡)＼</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception10")>( ´(00)`)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(´･ω･)o━━")>(´･ω･)o━━</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("━━o(･ω･｀)")>━━o(･ω･｀)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("♥‿♥")>♥‿♥</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(｢･ω･)｢")>(｢･ω･)｢</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("◉_◉")>◉_◉</button>
+          </div>
+        </div>
+        <div class="btn-group btn-group-justified">
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ʘ‿ʘ")>ʘ‿ʘ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception2")>⚆ _ ⚆</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ರ_ರ")>ರ_ರ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ಠ‿↼")>ಠ‿↼</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("¬_¬")>¬_¬</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("ಠ_ಠ")>ಠ_ಠ</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("｡◕‿◕｡")>｡◕‿◕｡</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(⊃‿⊂)")>(⊃‿⊂)</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception11")>◔ ⌣ ◔</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("exception12")>(┬(●●)┬ )</button>
+          </div>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default" onclick=insertOLA("(T＿T)")>(T＿T)</button>
+          </div>
+        </div>
+            <div id="editor">{{ input }}</div>
+        <form name= "myForm" method="post">{% csrf_token %}
+            <button type="button" class="btn btn-danger pull-right" onclick=compile()>Run</button>
+            <input type="hidden" name="code" />
+         </form>
+        {% load static %}
+        <script src="{% static "./src-noconflict/ace.js" %}" type="text/javascript" charset="utf-8"></script>
+        <script>
+            var editor = ace.edit("editor");
+            editor.$blockScrolling = Infinity;
+            editor.setTheme("ace/theme/monokai");
+            function insertOLA(s){
+                if(s=="exception1")
+                    editor.insert("☜( ﾟ∀ﾟ☜)");
+                else if(s=="exception2")
+                    editor.insert("⚆ _ ⚆");
+                else if(s=="exception3")
+                    editor.insert("ᕙ། – ڡ – །─∈");
+                else if(s=="exception4")
+                    editor.insert("ᕙ། – ڡ – །ᕗ");
+                else if(s=="exception5")
+                    editor.insert("3-། – ڡ – །ᕗ");
+                else if(s=="exception6")
+                    editor.insert("‹(⁽˙́ʷ˙̀⁾ )∨( ⁽˙́ʷ˙̀⁾)›");
+                else if(s=="exception7")
+                    editor.insert("⁄(⁄ ⁄•⁄-⁄•⁄ ⁄)⁄");
+                else if(s=="exception8")
+                    editor.insert("<º))))><");
+                else if(s=="exception9")
+                    editor.insert("／(≡・ x ・≡)＼");
+                else if(s=="exception10")
+                    editor.insert("( ´(00)`)");
+                else if(s=="exception11")
+                    editor.insert("◔ ⌣ ◔");
+                else if(s=="exception12")
+                    editor.insert("(┬(●●)┬ )");
+                else
+                    editor.insert(s);
+                var cursor=editor.selection.getCursor();
+                editor.focus();
+            }
+            function compile(){
+                document.myForm.code.value=editor.getValue();
+                document.myForm.submit();
+            }
+
+        </script>
+        <div style="background-color:grey">
+            <br><br>
+        </div>
+        <div class="scroll" id="output" style="color:white">
+            {% autoescape on %}
+                {{ result | linebreaksbr }}
+            {% endautoescape %}
+        </div>
+        </div>
+    </body>
+    
+</html>

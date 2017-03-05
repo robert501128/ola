@@ -1,0 +1,3221 @@
+State 137 conflicts: 1 shift/reduce
+State 138 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: START $end
+
+    1 START: BeginId ';' GlZorVDEC ZorFDEC MAIN COMP CEND EndId
+
+    2 BeginId: id
+
+    3 MAIN: %empty
+
+    4 CEND: KWend
+
+    5 EndId: id
+
+    6 GlZorVDEC: %empty
+    7          | GlZorVDEC GlVDEC
+
+    8 GlVDEC: KWvar ID_List ':' GlALLTYPE ';'
+
+    9 GlALLTYPE: SC_TYPE
+   10          | L_CONSTANT
+
+   11 ZorVDEC: %empty
+   12        | ZorVDEC VDEC
+
+   13 VDEC: KWvar ID_List ':' ALLTYPE ';'
+
+   14 ZorFDEC: %empty
+   15        | ZorFDEC FDEC
+
+   16 FDEC: FBeginId COMP KWend FEndId
+
+   17 FBeginId: id '(' ZorARG ')' PorR ';'
+
+   18 FEndId: id
+
+   19 PorR: %empty
+   20     | ':' TYPE
+
+   21 ZorARG: %empty
+   22       | ARG
+
+   23 ARG: ID_List ':' SC_TYPE
+   24    | ARG ';' ID_List ':' SC_TYPE
+
+   25 ID_List: id
+   26        | ID_List ',' id
+
+   27 ALLTYPE: SC_TYPE
+   28        | L_CONSTANT
+
+   29 SC_TYPE: TYPE
+   30        | KWarray Lint KWto Lint KWof SC_TYPE
+
+   31 TYPE: KWinteger
+   32     | KWreal
+   33     | KWstring
+   34     | KWboolean
+
+   35 L_CONSTANT: Lint
+   36           | Lreal
+   37           | Lstring
+   38           | L_BOOL
+
+   39 L_BOOL: KWtrue
+   40       | KWfalse
+
+   41 STMT: STMT COMP
+   42     | STMT SIMPLE
+   43     | STMT E ';'
+   44     | STMT COND
+   45     | STMT WHILE
+   46     | STMT FOR
+   47     | STMT RETURN
+   48     | %empty
+
+   49 COMPBEGIN: KWbegin
+
+   50 COMP: COMPBEGIN ZorVDEC STMT KWend
+
+   51 SIMPLE: VAR_REF assign E ';'
+   52       | PRINTCODE E ';'
+
+   53 PRINTCODE: KWprint
+
+   54 SIMPLE: KWread VAR_REF ';'
+
+   55 VAR_REF: id
+   56        | id REF
+
+   57 REF: '[' LE ']'
+   58    | REF '[' LE ']'
+
+   59 LE: '-' LE
+   60   | LE '*' LE
+   61   | LE '/' LE
+   62   | LE mod LE
+   63   | LE '+' LE
+   64   | LE '-' LE
+   65   | RCPN
+
+   66 RCPN: FUNC_INV
+   67     | L_CONSTANT
+   68     | VAR_REF
+
+   69 E: '-' E
+   70  | E '*' E
+   71  | E '/' E
+   72  | E mod E
+   73  | E '+' E
+   74  | E '-' E
+
+   75 BE: E '<' E
+   76   | E lte E
+   77   | E '=' E
+   78   | E gte E
+   79   | E '>' E
+   80   | E gl E
+   81   | not E
+   82   | E and E
+   83   | E or E
+
+   84 E: BE
+   85  | '(' E ')'
+   86  | CPN
+
+   87 CPN: FUNC_INV
+   88    | L_CONSTANT
+   89    | VAR_REF
+
+   90 FUNC_INV: FUNCID '(' ZorE ')'
+
+   91 FUNCID: id
+
+   92 ZorE: %empty
+   93     | MORE_E
+
+   94 MORE_E: E
+   95       | MORE_E ',' E
+
+   96 COND: KWif CONDBE KWthen CONDSTMT KWelse STMT KWend KWif
+
+   97 CONDBE: '(' BE ')'
+   98       | BE
+   99       | '(' CPN ')'
+  100       | CPN
+
+  101 CONDSTMT: STMT
+
+  102 COND: KWif CONDBE KWthen STMT KWend KWif
+
+  103 WHILE: CONTROLWHILE CONDBE KWdo STMT KWend KWdo
+
+  104 CONTROLWHILE: KWwhile
+
+  105 FOR: FORINITIALIZE KWdo STMT KWend KWdo
+
+  106 FORINITIALIZE: KWfor id assign Lint KWto Lint
+
+  107 RETURN: KWreturn E ';'
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 17 85 90 97 99
+')' (41) 17 85 90 97 99
+'*' (42) 60 70
+'+' (43) 63 73
+',' (44) 26 95
+'-' (45) 59 64 69 74
+'/' (47) 61 71
+':' (58) 8 13 20 23 24
+';' (59) 1 8 13 17 24 43 51 52 54 107
+'<' (60) 75
+'=' (61) 77
+'>' (62) 79
+'[' (91) 57 58
+']' (93) 57 58
+error (256)
+KWvar (258) 8 13
+mod (259) 62 72
+and (260) 82
+or (261) 83
+not (262) 81
+KWbegin (263) 49
+KWinteger (264) 31
+KWreal (265) 32
+KWprint (266) 53
+KWend (267) 4 16 50 96 102 103 105
+KWarray (268) 30
+KWboolean (269) 34
+KWdo (270) 103 105
+KWelse (271) 96
+KWfalse (272) 40
+KWfor (273) 106
+KWif (274) 96 102
+KWof (275) 30
+KWread (276) 54
+KWstring (277) 33
+KWthen (278) 96 102
+KWto (279) 30 106
+KWtrue (280) 39
+KWreturn (281) 107
+KWwhile (282) 104
+id (283) 2 5 17 18 25 26 55 56 91 106
+assign (284) 51 106
+lte (285) 76
+gte (286) 78
+gl (287) 80
+Lstring (288) 37
+Lreal (289) 36
+Lint (290) 30 35 106
+
+
+Nonterminals, with rules where they appear
+
+$accept (50)
+    on left: 0
+START (51)
+    on left: 1, on right: 0
+BeginId (52)
+    on left: 2, on right: 1
+MAIN (53)
+    on left: 3, on right: 1
+CEND (54)
+    on left: 4, on right: 1
+EndId (55)
+    on left: 5, on right: 1
+GlZorVDEC (56)
+    on left: 6 7, on right: 1 7
+GlVDEC (57)
+    on left: 8, on right: 7
+GlALLTYPE (58)
+    on left: 9 10, on right: 8
+ZorVDEC (59)
+    on left: 11 12, on right: 12 50
+VDEC (60)
+    on left: 13, on right: 12
+ZorFDEC (61)
+    on left: 14 15, on right: 1 15
+FDEC (62)
+    on left: 16, on right: 15
+FBeginId (63)
+    on left: 17, on right: 16
+FEndId (64)
+    on left: 18, on right: 16
+PorR (65)
+    on left: 19 20, on right: 17
+ZorARG (66)
+    on left: 21 22, on right: 17
+ARG (67)
+    on left: 23 24, on right: 22 24
+ID_List (68)
+    on left: 25 26, on right: 8 13 23 24 26
+ALLTYPE (69)
+    on left: 27 28, on right: 13
+SC_TYPE (70)
+    on left: 29 30, on right: 9 23 24 27 30
+TYPE (71)
+    on left: 31 32 33 34, on right: 20 29
+L_CONSTANT (72)
+    on left: 35 36 37 38, on right: 10 28 67 88
+L_BOOL (73)
+    on left: 39 40, on right: 38
+STMT (74)
+    on left: 41 42 43 44 45 46 47 48, on right: 41 42 43 44 45 46 47
+    50 96 101 102 103 105
+COMPBEGIN (75)
+    on left: 49, on right: 50
+COMP (76)
+    on left: 50, on right: 1 16 41
+SIMPLE (77)
+    on left: 51 52 54, on right: 42
+PRINTCODE (78)
+    on left: 53, on right: 52
+VAR_REF (79)
+    on left: 55 56, on right: 51 54 68 89
+REF (80)
+    on left: 57 58, on right: 56 58
+LE (81)
+    on left: 59 60 61 62 63 64 65, on right: 57 58 59 60 61 62 63 64
+RCPN (82)
+    on left: 66 67 68, on right: 65
+E (83)
+    on left: 69 70 71 72 73 74 84 85 86, on right: 43 51 52 69 70 71
+    72 73 74 75 76 77 78 79 80 81 82 83 85 94 95 107
+BE (84)
+    on left: 75 76 77 78 79 80 81 82 83, on right: 84 97 98
+CPN (85)
+    on left: 87 88 89, on right: 86 99 100
+FUNC_INV (86)
+    on left: 90, on right: 66 87
+FUNCID (87)
+    on left: 91, on right: 90
+ZorE (88)
+    on left: 92 93, on right: 90
+MORE_E (89)
+    on left: 94 95, on right: 93 95
+COND (90)
+    on left: 96 102, on right: 44
+CONDBE (91)
+    on left: 97 98 99 100, on right: 96 102 103
+CONDSTMT (92)
+    on left: 101, on right: 96
+WHILE (93)
+    on left: 103, on right: 45
+CONTROLWHILE (94)
+    on left: 104, on right: 103
+FOR (95)
+    on left: 105, on right: 46
+FORINITIALIZE (96)
+    on left: 106, on right: 105
+RETURN (97)
+    on left: 107, on right: 47
+
+
+State 0
+
+    0 $accept: . START $end
+
+    id  shift, and go to state 1
+
+    START    go to state 2
+    BeginId  go to state 3
+
+
+State 1
+
+    2 BeginId: id .
+
+    $default  reduce using rule 2 (BeginId)
+
+
+State 2
+
+    0 $accept: START . $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    1 START: BeginId . ';' GlZorVDEC ZorFDEC MAIN COMP CEND EndId
+
+    ';'  shift, and go to state 5
+
+
+State 4
+
+    0 $accept: START $end .
+
+    $default  accept
+
+
+State 5
+
+    1 START: BeginId ';' . GlZorVDEC ZorFDEC MAIN COMP CEND EndId
+
+    $default  reduce using rule 6 (GlZorVDEC)
+
+    GlZorVDEC  go to state 6
+
+
+State 6
+
+    1 START: BeginId ';' GlZorVDEC . ZorFDEC MAIN COMP CEND EndId
+    7 GlZorVDEC: GlZorVDEC . GlVDEC
+
+    KWvar  shift, and go to state 7
+
+    $default  reduce using rule 14 (ZorFDEC)
+
+    GlVDEC   go to state 8
+    ZorFDEC  go to state 9
+
+
+State 7
+
+    8 GlVDEC: KWvar . ID_List ':' GlALLTYPE ';'
+
+    id  shift, and go to state 10
+
+    ID_List  go to state 11
+
+
+State 8
+
+    7 GlZorVDEC: GlZorVDEC GlVDEC .
+
+    $default  reduce using rule 7 (GlZorVDEC)
+
+
+State 9
+
+    1 START: BeginId ';' GlZorVDEC ZorFDEC . MAIN COMP CEND EndId
+   15 ZorFDEC: ZorFDEC . FDEC
+
+    id  shift, and go to state 12
+
+    $default  reduce using rule 3 (MAIN)
+
+    MAIN      go to state 13
+    FDEC      go to state 14
+    FBeginId  go to state 15
+
+
+State 10
+
+   25 ID_List: id .
+
+    $default  reduce using rule 25 (ID_List)
+
+
+State 11
+
+    8 GlVDEC: KWvar ID_List . ':' GlALLTYPE ';'
+   26 ID_List: ID_List . ',' id
+
+    ','  shift, and go to state 16
+    ':'  shift, and go to state 17
+
+
+State 12
+
+   17 FBeginId: id . '(' ZorARG ')' PorR ';'
+
+    '('  shift, and go to state 18
+
+
+State 13
+
+    1 START: BeginId ';' GlZorVDEC ZorFDEC MAIN . COMP CEND EndId
+
+    KWbegin  shift, and go to state 19
+
+    COMPBEGIN  go to state 20
+    COMP       go to state 21
+
+
+State 14
+
+   15 ZorFDEC: ZorFDEC FDEC .
+
+    $default  reduce using rule 15 (ZorFDEC)
+
+
+State 15
+
+   16 FDEC: FBeginId . COMP KWend FEndId
+
+    KWbegin  shift, and go to state 19
+
+    COMPBEGIN  go to state 20
+    COMP       go to state 22
+
+
+State 16
+
+   26 ID_List: ID_List ',' . id
+
+    id  shift, and go to state 23
+
+
+State 17
+
+    8 GlVDEC: KWvar ID_List ':' . GlALLTYPE ';'
+
+    KWinteger  shift, and go to state 24
+    KWreal     shift, and go to state 25
+    KWarray    shift, and go to state 26
+    KWboolean  shift, and go to state 27
+    KWfalse    shift, and go to state 28
+    KWstring   shift, and go to state 29
+    KWtrue     shift, and go to state 30
+    Lstring    shift, and go to state 31
+    Lreal      shift, and go to state 32
+    Lint       shift, and go to state 33
+
+    GlALLTYPE   go to state 34
+    SC_TYPE     go to state 35
+    TYPE        go to state 36
+    L_CONSTANT  go to state 37
+    L_BOOL      go to state 38
+
+
+State 18
+
+   17 FBeginId: id '(' . ZorARG ')' PorR ';'
+
+    id  shift, and go to state 10
+
+    $default  reduce using rule 21 (ZorARG)
+
+    ZorARG   go to state 39
+    ARG      go to state 40
+    ID_List  go to state 41
+
+
+State 19
+
+   49 COMPBEGIN: KWbegin .
+
+    $default  reduce using rule 49 (COMPBEGIN)
+
+
+State 20
+
+   50 COMP: COMPBEGIN . ZorVDEC STMT KWend
+
+    $default  reduce using rule 11 (ZorVDEC)
+
+    ZorVDEC  go to state 42
+
+
+State 21
+
+    1 START: BeginId ';' GlZorVDEC ZorFDEC MAIN COMP . CEND EndId
+
+    KWend  shift, and go to state 43
+
+    CEND  go to state 44
+
+
+State 22
+
+   16 FDEC: FBeginId COMP . KWend FEndId
+
+    KWend  shift, and go to state 45
+
+
+State 23
+
+   26 ID_List: ID_List ',' id .
+
+    $default  reduce using rule 26 (ID_List)
+
+
+State 24
+
+   31 TYPE: KWinteger .
+
+    $default  reduce using rule 31 (TYPE)
+
+
+State 25
+
+   32 TYPE: KWreal .
+
+    $default  reduce using rule 32 (TYPE)
+
+
+State 26
+
+   30 SC_TYPE: KWarray . Lint KWto Lint KWof SC_TYPE
+
+    Lint  shift, and go to state 46
+
+
+State 27
+
+   34 TYPE: KWboolean .
+
+    $default  reduce using rule 34 (TYPE)
+
+
+State 28
+
+   40 L_BOOL: KWfalse .
+
+    $default  reduce using rule 40 (L_BOOL)
+
+
+State 29
+
+   33 TYPE: KWstring .
+
+    $default  reduce using rule 33 (TYPE)
+
+
+State 30
+
+   39 L_BOOL: KWtrue .
+
+    $default  reduce using rule 39 (L_BOOL)
+
+
+State 31
+
+   37 L_CONSTANT: Lstring .
+
+    $default  reduce using rule 37 (L_CONSTANT)
+
+
+State 32
+
+   36 L_CONSTANT: Lreal .
+
+    $default  reduce using rule 36 (L_CONSTANT)
+
+
+State 33
+
+   35 L_CONSTANT: Lint .
+
+    $default  reduce using rule 35 (L_CONSTANT)
+
+
+State 34
+
+    8 GlVDEC: KWvar ID_List ':' GlALLTYPE . ';'
+
+    ';'  shift, and go to state 47
+
+
+State 35
+
+    9 GlALLTYPE: SC_TYPE .
+
+    $default  reduce using rule 9 (GlALLTYPE)
+
+
+State 36
+
+   29 SC_TYPE: TYPE .
+
+    $default  reduce using rule 29 (SC_TYPE)
+
+
+State 37
+
+   10 GlALLTYPE: L_CONSTANT .
+
+    $default  reduce using rule 10 (GlALLTYPE)
+
+
+State 38
+
+   38 L_CONSTANT: L_BOOL .
+
+    $default  reduce using rule 38 (L_CONSTANT)
+
+
+State 39
+
+   17 FBeginId: id '(' ZorARG . ')' PorR ';'
+
+    ')'  shift, and go to state 48
+
+
+State 40
+
+   22 ZorARG: ARG .
+   24 ARG: ARG . ';' ID_List ':' SC_TYPE
+
+    ';'  shift, and go to state 49
+
+    $default  reduce using rule 22 (ZorARG)
+
+
+State 41
+
+   23 ARG: ID_List . ':' SC_TYPE
+   26 ID_List: ID_List . ',' id
+
+    ','  shift, and go to state 16
+    ':'  shift, and go to state 50
+
+
+State 42
+
+   12 ZorVDEC: ZorVDEC . VDEC
+   50 COMP: COMPBEGIN ZorVDEC . STMT KWend
+
+    KWvar  shift, and go to state 51
+
+    $default  reduce using rule 48 (STMT)
+
+    VDEC  go to state 52
+    STMT  go to state 53
+
+
+State 43
+
+    4 CEND: KWend .
+
+    $default  reduce using rule 4 (CEND)
+
+
+State 44
+
+    1 START: BeginId ';' GlZorVDEC ZorFDEC MAIN COMP CEND . EndId
+
+    id  shift, and go to state 54
+
+    EndId  go to state 55
+
+
+State 45
+
+   16 FDEC: FBeginId COMP KWend . FEndId
+
+    id  shift, and go to state 56
+
+    FEndId  go to state 57
+
+
+State 46
+
+   30 SC_TYPE: KWarray Lint . KWto Lint KWof SC_TYPE
+
+    KWto  shift, and go to state 58
+
+
+State 47
+
+    8 GlVDEC: KWvar ID_List ':' GlALLTYPE ';' .
+
+    $default  reduce using rule 8 (GlVDEC)
+
+
+State 48
+
+   17 FBeginId: id '(' ZorARG ')' . PorR ';'
+
+    ':'  shift, and go to state 59
+
+    $default  reduce using rule 19 (PorR)
+
+    PorR  go to state 60
+
+
+State 49
+
+   24 ARG: ARG ';' . ID_List ':' SC_TYPE
+
+    id  shift, and go to state 10
+
+    ID_List  go to state 61
+
+
+State 50
+
+   23 ARG: ID_List ':' . SC_TYPE
+
+    KWinteger  shift, and go to state 24
+    KWreal     shift, and go to state 25
+    KWarray    shift, and go to state 26
+    KWboolean  shift, and go to state 27
+    KWstring   shift, and go to state 29
+
+    SC_TYPE  go to state 62
+    TYPE     go to state 36
+
+
+State 51
+
+   13 VDEC: KWvar . ID_List ':' ALLTYPE ';'
+
+    id  shift, and go to state 10
+
+    ID_List  go to state 63
+
+
+State 52
+
+   12 ZorVDEC: ZorVDEC VDEC .
+
+    $default  reduce using rule 12 (ZorVDEC)
+
+
+State 53
+
+   41 STMT: STMT . COMP
+   42     | STMT . SIMPLE
+   43     | STMT . E ';'
+   44     | STMT . COND
+   45     | STMT . WHILE
+   46     | STMT . FOR
+   47     | STMT . RETURN
+   50 COMP: COMPBEGIN ZorVDEC STMT . KWend
+
+    '('       shift, and go to state 64
+    '-'       shift, and go to state 65
+    not       shift, and go to state 66
+    KWbegin   shift, and go to state 19
+    KWprint   shift, and go to state 67
+    KWend     shift, and go to state 68
+    KWfalse   shift, and go to state 28
+    KWfor     shift, and go to state 69
+    KWif      shift, and go to state 70
+    KWread    shift, and go to state 71
+    KWtrue    shift, and go to state 30
+    KWreturn  shift, and go to state 72
+    KWwhile   shift, and go to state 73
+    id        shift, and go to state 74
+    Lstring   shift, and go to state 31
+    Lreal     shift, and go to state 32
+    Lint      shift, and go to state 33
+
+    L_CONSTANT     go to state 75
+    L_BOOL         go to state 38
+    COMPBEGIN      go to state 20
+    COMP           go to state 76
+    SIMPLE         go to state 77
+    PRINTCODE      go to state 78
+    VAR_REF        go to state 79
+    E              go to state 80
+    BE             go to state 81
+    CPN            go to state 82
+    FUNC_INV       go to state 83
+    FUNCID         go to state 84
+    COND           go to state 85
+    WHILE          go to state 86
+    CONTROLWHILE   go to state 87
+    FOR            go to state 88
+    FORINITIALIZE  go to state 89
+    RETURN         go to state 90
+
+
+State 54
+
+    5 EndId: id .
+
+    $default  reduce using rule 5 (EndId)
+
+
+State 55
+
+    1 START: BeginId ';' GlZorVDEC ZorFDEC MAIN COMP CEND EndId .
+
+    $default  reduce using rule 1 (START)
+
+
+State 56
+
+   18 FEndId: id .
+
+    $default  reduce using rule 18 (FEndId)
+
+
+State 57
+
+   16 FDEC: FBeginId COMP KWend FEndId .
+
+    $default  reduce using rule 16 (FDEC)
+
+
+State 58
+
+   30 SC_TYPE: KWarray Lint KWto . Lint KWof SC_TYPE
+
+    Lint  shift, and go to state 91
+
+
+State 59
+
+   20 PorR: ':' . TYPE
+
+    KWinteger  shift, and go to state 24
+    KWreal     shift, and go to state 25
+    KWboolean  shift, and go to state 27
+    KWstring   shift, and go to state 29
+
+    TYPE  go to state 92
+
+
+State 60
+
+   17 FBeginId: id '(' ZorARG ')' PorR . ';'
+
+    ';'  shift, and go to state 93
+
+
+State 61
+
+   24 ARG: ARG ';' ID_List . ':' SC_TYPE
+   26 ID_List: ID_List . ',' id
+
+    ','  shift, and go to state 16
+    ':'  shift, and go to state 94
+
+
+State 62
+
+   23 ARG: ID_List ':' SC_TYPE .
+
+    $default  reduce using rule 23 (ARG)
+
+
+State 63
+
+   13 VDEC: KWvar ID_List . ':' ALLTYPE ';'
+   26 ID_List: ID_List . ',' id
+
+    ','  shift, and go to state 16
+    ':'  shift, and go to state 95
+
+
+State 64
+
+   85 E: '(' . E ')'
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 97
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 65
+
+   69 E: '-' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 98
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 66
+
+   81 BE: not . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 99
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 67
+
+   53 PRINTCODE: KWprint .
+
+    $default  reduce using rule 53 (PRINTCODE)
+
+
+State 68
+
+   50 COMP: COMPBEGIN ZorVDEC STMT KWend .
+
+    $default  reduce using rule 50 (COMP)
+
+
+State 69
+
+  106 FORINITIALIZE: KWfor . id assign Lint KWto Lint
+
+    id  shift, and go to state 100
+
+
+State 70
+
+   96 COND: KWif . CONDBE KWthen CONDSTMT KWelse STMT KWend KWif
+  102     | KWif . CONDBE KWthen STMT KWend KWif
+
+    '('      shift, and go to state 101
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 102
+    BE          go to state 103
+    CPN         go to state 104
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+    CONDBE      go to state 105
+
+
+State 71
+
+   54 SIMPLE: KWread . VAR_REF ';'
+
+    id  shift, and go to state 106
+
+    VAR_REF  go to state 107
+
+
+State 72
+
+  107 RETURN: KWreturn . E ';'
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 108
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 73
+
+  104 CONTROLWHILE: KWwhile .
+
+    $default  reduce using rule 104 (CONTROLWHILE)
+
+
+State 74
+
+   55 VAR_REF: id .
+   56        | id . REF
+   91 FUNCID: id .
+
+    '['  shift, and go to state 109
+
+    '('       reduce using rule 91 (FUNCID)
+    $default  reduce using rule 55 (VAR_REF)
+
+    REF  go to state 110
+
+
+State 75
+
+   88 CPN: L_CONSTANT .
+
+    $default  reduce using rule 88 (CPN)
+
+
+State 76
+
+   41 STMT: STMT COMP .
+
+    $default  reduce using rule 41 (STMT)
+
+
+State 77
+
+   42 STMT: STMT SIMPLE .
+
+    $default  reduce using rule 42 (STMT)
+
+
+State 78
+
+   52 SIMPLE: PRINTCODE . E ';'
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 111
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 79
+
+   51 SIMPLE: VAR_REF . assign E ';'
+   89 CPN: VAR_REF .
+
+    assign  shift, and go to state 112
+
+    $default  reduce using rule 89 (CPN)
+
+
+State 80
+
+   43 STMT: STMT E . ';'
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    ';'  shift, and go to state 113
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+
+State 81
+
+   84 E: BE .
+
+    $default  reduce using rule 84 (E)
+
+
+State 82
+
+   86 E: CPN .
+
+    $default  reduce using rule 86 (E)
+
+
+State 83
+
+   87 CPN: FUNC_INV .
+
+    $default  reduce using rule 87 (CPN)
+
+
+State 84
+
+   90 FUNC_INV: FUNCID . '(' ZorE ')'
+
+    '('  shift, and go to state 127
+
+
+State 85
+
+   44 STMT: STMT COND .
+
+    $default  reduce using rule 44 (STMT)
+
+
+State 86
+
+   45 STMT: STMT WHILE .
+
+    $default  reduce using rule 45 (STMT)
+
+
+State 87
+
+  103 WHILE: CONTROLWHILE . CONDBE KWdo STMT KWend KWdo
+
+    '('      shift, and go to state 101
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 102
+    BE          go to state 103
+    CPN         go to state 104
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+    CONDBE      go to state 128
+
+
+State 88
+
+   46 STMT: STMT FOR .
+
+    $default  reduce using rule 46 (STMT)
+
+
+State 89
+
+  105 FOR: FORINITIALIZE . KWdo STMT KWend KWdo
+
+    KWdo  shift, and go to state 129
+
+
+State 90
+
+   47 STMT: STMT RETURN .
+
+    $default  reduce using rule 47 (STMT)
+
+
+State 91
+
+   30 SC_TYPE: KWarray Lint KWto Lint . KWof SC_TYPE
+
+    KWof  shift, and go to state 130
+
+
+State 92
+
+   20 PorR: ':' TYPE .
+
+    $default  reduce using rule 20 (PorR)
+
+
+State 93
+
+   17 FBeginId: id '(' ZorARG ')' PorR ';' .
+
+    $default  reduce using rule 17 (FBeginId)
+
+
+State 94
+
+   24 ARG: ARG ';' ID_List ':' . SC_TYPE
+
+    KWinteger  shift, and go to state 24
+    KWreal     shift, and go to state 25
+    KWarray    shift, and go to state 26
+    KWboolean  shift, and go to state 27
+    KWstring   shift, and go to state 29
+
+    SC_TYPE  go to state 131
+    TYPE     go to state 36
+
+
+State 95
+
+   13 VDEC: KWvar ID_List ':' . ALLTYPE ';'
+
+    KWinteger  shift, and go to state 24
+    KWreal     shift, and go to state 25
+    KWarray    shift, and go to state 26
+    KWboolean  shift, and go to state 27
+    KWfalse    shift, and go to state 28
+    KWstring   shift, and go to state 29
+    KWtrue     shift, and go to state 30
+    Lstring    shift, and go to state 31
+    Lreal      shift, and go to state 32
+    Lint       shift, and go to state 33
+
+    ALLTYPE     go to state 132
+    SC_TYPE     go to state 133
+    TYPE        go to state 36
+    L_CONSTANT  go to state 134
+    L_BOOL      go to state 38
+
+
+State 96
+
+   89 CPN: VAR_REF .
+
+    $default  reduce using rule 89 (CPN)
+
+
+State 97
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+   85 E: '(' E . ')'
+
+    ')'  shift, and go to state 135
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+
+State 98
+
+   69 E: '-' E .
+   70  | E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    $default  reduce using rule 69 (E)
+
+
+State 99
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   81   | not E .
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+    $default  reduce using rule 81 (BE)
+
+
+State 100
+
+  106 FORINITIALIZE: KWfor id . assign Lint KWto Lint
+
+    assign  shift, and go to state 136
+
+
+State 101
+
+   85 E: '(' . E ')'
+   97 CONDBE: '(' . BE ')'
+   99       | '(' . CPN ')'
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 97
+    BE          go to state 137
+    CPN         go to state 138
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 102
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+
+State 103
+
+   84 E: BE .
+   98 CONDBE: BE .
+
+    KWdo      reduce using rule 98 (CONDBE)
+    KWthen    reduce using rule 98 (CONDBE)
+    $default  reduce using rule 84 (E)
+
+
+State 104
+
+   86 E: CPN .
+  100 CONDBE: CPN .
+
+    KWdo      reduce using rule 100 (CONDBE)
+    KWthen    reduce using rule 100 (CONDBE)
+    $default  reduce using rule 86 (E)
+
+
+State 105
+
+   96 COND: KWif CONDBE . KWthen CONDSTMT KWelse STMT KWend KWif
+  102     | KWif CONDBE . KWthen STMT KWend KWif
+
+    KWthen  shift, and go to state 139
+
+
+State 106
+
+   55 VAR_REF: id .
+   56        | id . REF
+
+    '['  shift, and go to state 109
+
+    $default  reduce using rule 55 (VAR_REF)
+
+    REF  go to state 110
+
+
+State 107
+
+   54 SIMPLE: KWread VAR_REF . ';'
+
+    ';'  shift, and go to state 140
+
+
+State 108
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+  107 RETURN: KWreturn E . ';'
+
+    ';'  shift, and go to state 141
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+
+State 109
+
+   57 REF: '[' . LE ']'
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 145
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 110
+
+   56 VAR_REF: id REF .
+   58 REF: REF . '[' LE ']'
+
+    '['  shift, and go to state 148
+
+    $default  reduce using rule 56 (VAR_REF)
+
+
+State 111
+
+   52 SIMPLE: PRINTCODE E . ';'
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    ';'  shift, and go to state 149
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+
+State 112
+
+   51 SIMPLE: VAR_REF assign . E ';'
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 150
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 113
+
+   43 STMT: STMT E ';' .
+
+    $default  reduce using rule 43 (STMT)
+
+
+State 114
+
+   73 E: E '+' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 151
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 115
+
+   74 E: E '-' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 152
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 116
+
+   70 E: E '*' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 153
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 117
+
+   71 E: E '/' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 154
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 118
+
+   72 E: E mod . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 155
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 119
+
+   79 BE: E '>' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 156
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 120
+
+   77 BE: E '=' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 157
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 121
+
+   82 BE: E and . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 158
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 122
+
+   83 BE: E or . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 159
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 123
+
+   75 BE: E '<' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 160
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 124
+
+   76 BE: E lte . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 161
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 125
+
+   78 BE: E gte . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 162
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 126
+
+   80 BE: E gl . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 163
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 127
+
+   90 FUNC_INV: FUNCID '(' . ZorE ')'
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    $default  reduce using rule 92 (ZorE)
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 164
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+    ZorE        go to state 165
+    MORE_E      go to state 166
+
+
+State 128
+
+  103 WHILE: CONTROLWHILE CONDBE . KWdo STMT KWend KWdo
+
+    KWdo  shift, and go to state 167
+
+
+State 129
+
+  105 FOR: FORINITIALIZE KWdo . STMT KWend KWdo
+
+    $default  reduce using rule 48 (STMT)
+
+    STMT  go to state 168
+
+
+State 130
+
+   30 SC_TYPE: KWarray Lint KWto Lint KWof . SC_TYPE
+
+    KWinteger  shift, and go to state 24
+    KWreal     shift, and go to state 25
+    KWarray    shift, and go to state 26
+    KWboolean  shift, and go to state 27
+    KWstring   shift, and go to state 29
+
+    SC_TYPE  go to state 169
+    TYPE     go to state 36
+
+
+State 131
+
+   24 ARG: ARG ';' ID_List ':' SC_TYPE .
+
+    $default  reduce using rule 24 (ARG)
+
+
+State 132
+
+   13 VDEC: KWvar ID_List ':' ALLTYPE . ';'
+
+    ';'  shift, and go to state 170
+
+
+State 133
+
+   27 ALLTYPE: SC_TYPE .
+
+    $default  reduce using rule 27 (ALLTYPE)
+
+
+State 134
+
+   28 ALLTYPE: L_CONSTANT .
+
+    $default  reduce using rule 28 (ALLTYPE)
+
+
+State 135
+
+   85 E: '(' E ')' .
+
+    $default  reduce using rule 85 (E)
+
+
+State 136
+
+  106 FORINITIALIZE: KWfor id assign . Lint KWto Lint
+
+    Lint  shift, and go to state 171
+
+
+State 137
+
+   84 E: BE .
+   97 CONDBE: '(' BE . ')'
+
+    ')'  shift, and go to state 172
+
+    ')'       [reduce using rule 84 (E)]
+    $default  reduce using rule 84 (E)
+
+
+State 138
+
+   86 E: CPN .
+   99 CONDBE: '(' CPN . ')'
+
+    ')'  shift, and go to state 173
+
+    ')'       [reduce using rule 86 (E)]
+    $default  reduce using rule 86 (E)
+
+
+State 139
+
+   96 COND: KWif CONDBE KWthen . CONDSTMT KWelse STMT KWend KWif
+  102     | KWif CONDBE KWthen . STMT KWend KWif
+
+    $default  reduce using rule 48 (STMT)
+
+    STMT      go to state 174
+    CONDSTMT  go to state 175
+
+
+State 140
+
+   54 SIMPLE: KWread VAR_REF ';' .
+
+    $default  reduce using rule 54 (SIMPLE)
+
+
+State 141
+
+  107 RETURN: KWreturn E ';' .
+
+    $default  reduce using rule 107 (RETURN)
+
+
+State 142
+
+   59 LE: '-' . LE
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 176
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 143
+
+   67 RCPN: L_CONSTANT .
+
+    $default  reduce using rule 67 (RCPN)
+
+
+State 144
+
+   68 RCPN: VAR_REF .
+
+    $default  reduce using rule 68 (RCPN)
+
+
+State 145
+
+   57 REF: '[' LE . ']'
+   60 LE: LE . '*' LE
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+
+    ']'  shift, and go to state 177
+    '+'  shift, and go to state 178
+    '-'  shift, and go to state 179
+    '*'  shift, and go to state 180
+    '/'  shift, and go to state 181
+    mod  shift, and go to state 182
+
+
+State 146
+
+   65 LE: RCPN .
+
+    $default  reduce using rule 65 (LE)
+
+
+State 147
+
+   66 RCPN: FUNC_INV .
+
+    $default  reduce using rule 66 (RCPN)
+
+
+State 148
+
+   58 REF: REF '[' . LE ']'
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 183
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 149
+
+   52 SIMPLE: PRINTCODE E ';' .
+
+    $default  reduce using rule 52 (SIMPLE)
+
+
+State 150
+
+   51 SIMPLE: VAR_REF assign E . ';'
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    ';'  shift, and go to state 184
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+
+State 151
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   73  | E '+' E .
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 73 (E)
+
+
+State 152
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   74  | E '-' E .
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 74 (E)
+
+
+State 153
+
+   70 E: E . '*' E
+   70  | E '*' E .
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    $default  reduce using rule 70 (E)
+
+
+State 154
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   71  | E '/' E .
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    $default  reduce using rule 71 (E)
+
+
+State 155
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   72  | E mod E .
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    $default  reduce using rule 72 (E)
+
+
+State 156
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   79   | E '>' E .
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 79 (BE)
+
+
+State 157
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   77   | E '=' E .
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 77 (BE)
+
+
+State 158
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   82   | E and E .
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+    $default  reduce using rule 82 (BE)
+
+
+State 159
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+   83   | E or E .
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+    $default  reduce using rule 83 (BE)
+
+
+State 160
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   75   | E '<' E .
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 75 (BE)
+
+
+State 161
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   76   | E lte E .
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 76 (BE)
+
+
+State 162
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   78   | E gte E .
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 78 (BE)
+
+
+State 163
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   80   | E gl E .
+   82   | E . and E
+   83   | E . or E
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+
+    $default  reduce using rule 80 (BE)
+
+
+State 164
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+   94 MORE_E: E .
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+    $default  reduce using rule 94 (MORE_E)
+
+
+State 165
+
+   90 FUNC_INV: FUNCID '(' ZorE . ')'
+
+    ')'  shift, and go to state 185
+
+
+State 166
+
+   93 ZorE: MORE_E .
+   95 MORE_E: MORE_E . ',' E
+
+    ','  shift, and go to state 186
+
+    $default  reduce using rule 93 (ZorE)
+
+
+State 167
+
+  103 WHILE: CONTROLWHILE CONDBE KWdo . STMT KWend KWdo
+
+    $default  reduce using rule 48 (STMT)
+
+    STMT  go to state 187
+
+
+State 168
+
+   41 STMT: STMT . COMP
+   42     | STMT . SIMPLE
+   43     | STMT . E ';'
+   44     | STMT . COND
+   45     | STMT . WHILE
+   46     | STMT . FOR
+   47     | STMT . RETURN
+  105 FOR: FORINITIALIZE KWdo STMT . KWend KWdo
+
+    '('       shift, and go to state 64
+    '-'       shift, and go to state 65
+    not       shift, and go to state 66
+    KWbegin   shift, and go to state 19
+    KWprint   shift, and go to state 67
+    KWend     shift, and go to state 188
+    KWfalse   shift, and go to state 28
+    KWfor     shift, and go to state 69
+    KWif      shift, and go to state 70
+    KWread    shift, and go to state 71
+    KWtrue    shift, and go to state 30
+    KWreturn  shift, and go to state 72
+    KWwhile   shift, and go to state 73
+    id        shift, and go to state 74
+    Lstring   shift, and go to state 31
+    Lreal     shift, and go to state 32
+    Lint      shift, and go to state 33
+
+    L_CONSTANT     go to state 75
+    L_BOOL         go to state 38
+    COMPBEGIN      go to state 20
+    COMP           go to state 76
+    SIMPLE         go to state 77
+    PRINTCODE      go to state 78
+    VAR_REF        go to state 79
+    E              go to state 80
+    BE             go to state 81
+    CPN            go to state 82
+    FUNC_INV       go to state 83
+    FUNCID         go to state 84
+    COND           go to state 85
+    WHILE          go to state 86
+    CONTROLWHILE   go to state 87
+    FOR            go to state 88
+    FORINITIALIZE  go to state 89
+    RETURN         go to state 90
+
+
+State 169
+
+   30 SC_TYPE: KWarray Lint KWto Lint KWof SC_TYPE .
+
+    $default  reduce using rule 30 (SC_TYPE)
+
+
+State 170
+
+   13 VDEC: KWvar ID_List ':' ALLTYPE ';' .
+
+    $default  reduce using rule 13 (VDEC)
+
+
+State 171
+
+  106 FORINITIALIZE: KWfor id assign Lint . KWto Lint
+
+    KWto  shift, and go to state 189
+
+
+State 172
+
+   97 CONDBE: '(' BE ')' .
+
+    $default  reduce using rule 97 (CONDBE)
+
+
+State 173
+
+   99 CONDBE: '(' CPN ')' .
+
+    $default  reduce using rule 99 (CONDBE)
+
+
+State 174
+
+   41 STMT: STMT . COMP
+   42     | STMT . SIMPLE
+   43     | STMT . E ';'
+   44     | STMT . COND
+   45     | STMT . WHILE
+   46     | STMT . FOR
+   47     | STMT . RETURN
+  101 CONDSTMT: STMT .
+  102 COND: KWif CONDBE KWthen STMT . KWend KWif
+
+    '('       shift, and go to state 64
+    '-'       shift, and go to state 65
+    not       shift, and go to state 66
+    KWbegin   shift, and go to state 19
+    KWprint   shift, and go to state 67
+    KWend     shift, and go to state 190
+    KWfalse   shift, and go to state 28
+    KWfor     shift, and go to state 69
+    KWif      shift, and go to state 70
+    KWread    shift, and go to state 71
+    KWtrue    shift, and go to state 30
+    KWreturn  shift, and go to state 72
+    KWwhile   shift, and go to state 73
+    id        shift, and go to state 74
+    Lstring   shift, and go to state 31
+    Lreal     shift, and go to state 32
+    Lint      shift, and go to state 33
+
+    $default  reduce using rule 101 (CONDSTMT)
+
+    L_CONSTANT     go to state 75
+    L_BOOL         go to state 38
+    COMPBEGIN      go to state 20
+    COMP           go to state 76
+    SIMPLE         go to state 77
+    PRINTCODE      go to state 78
+    VAR_REF        go to state 79
+    E              go to state 80
+    BE             go to state 81
+    CPN            go to state 82
+    FUNC_INV       go to state 83
+    FUNCID         go to state 84
+    COND           go to state 85
+    WHILE          go to state 86
+    CONTROLWHILE   go to state 87
+    FOR            go to state 88
+    FORINITIALIZE  go to state 89
+    RETURN         go to state 90
+
+
+State 175
+
+   96 COND: KWif CONDBE KWthen CONDSTMT . KWelse STMT KWend KWif
+
+    KWelse  shift, and go to state 191
+
+
+State 176
+
+   59 LE: '-' LE .
+   60   | LE . '*' LE
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+
+    $default  reduce using rule 59 (LE)
+
+
+State 177
+
+   57 REF: '[' LE ']' .
+
+    $default  reduce using rule 57 (REF)
+
+
+State 178
+
+   63 LE: LE '+' . LE
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 192
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 179
+
+   64 LE: LE '-' . LE
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 193
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 180
+
+   60 LE: LE '*' . LE
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 194
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 181
+
+   61 LE: LE '/' . LE
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 195
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 182
+
+   62 LE: LE mod . LE
+
+    '-'      shift, and go to state 142
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 143
+    L_BOOL      go to state 38
+    VAR_REF     go to state 144
+    LE          go to state 196
+    RCPN        go to state 146
+    FUNC_INV    go to state 147
+    FUNCID      go to state 84
+
+
+State 183
+
+   58 REF: REF '[' LE . ']'
+   60 LE: LE . '*' LE
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+
+    ']'  shift, and go to state 197
+    '+'  shift, and go to state 178
+    '-'  shift, and go to state 179
+    '*'  shift, and go to state 180
+    '/'  shift, and go to state 181
+    mod  shift, and go to state 182
+
+
+State 184
+
+   51 SIMPLE: VAR_REF assign E ';' .
+
+    $default  reduce using rule 51 (SIMPLE)
+
+
+State 185
+
+   90 FUNC_INV: FUNCID '(' ZorE ')' .
+
+    $default  reduce using rule 90 (FUNC_INV)
+
+
+State 186
+
+   95 MORE_E: MORE_E ',' . E
+
+    '('      shift, and go to state 64
+    '-'      shift, and go to state 65
+    not      shift, and go to state 66
+    KWfalse  shift, and go to state 28
+    KWtrue   shift, and go to state 30
+    id       shift, and go to state 74
+    Lstring  shift, and go to state 31
+    Lreal    shift, and go to state 32
+    Lint     shift, and go to state 33
+
+    L_CONSTANT  go to state 75
+    L_BOOL      go to state 38
+    VAR_REF     go to state 96
+    E           go to state 198
+    BE          go to state 81
+    CPN         go to state 82
+    FUNC_INV    go to state 83
+    FUNCID      go to state 84
+
+
+State 187
+
+   41 STMT: STMT . COMP
+   42     | STMT . SIMPLE
+   43     | STMT . E ';'
+   44     | STMT . COND
+   45     | STMT . WHILE
+   46     | STMT . FOR
+   47     | STMT . RETURN
+  103 WHILE: CONTROLWHILE CONDBE KWdo STMT . KWend KWdo
+
+    '('       shift, and go to state 64
+    '-'       shift, and go to state 65
+    not       shift, and go to state 66
+    KWbegin   shift, and go to state 19
+    KWprint   shift, and go to state 67
+    KWend     shift, and go to state 199
+    KWfalse   shift, and go to state 28
+    KWfor     shift, and go to state 69
+    KWif      shift, and go to state 70
+    KWread    shift, and go to state 71
+    KWtrue    shift, and go to state 30
+    KWreturn  shift, and go to state 72
+    KWwhile   shift, and go to state 73
+    id        shift, and go to state 74
+    Lstring   shift, and go to state 31
+    Lreal     shift, and go to state 32
+    Lint      shift, and go to state 33
+
+    L_CONSTANT     go to state 75
+    L_BOOL         go to state 38
+    COMPBEGIN      go to state 20
+    COMP           go to state 76
+    SIMPLE         go to state 77
+    PRINTCODE      go to state 78
+    VAR_REF        go to state 79
+    E              go to state 80
+    BE             go to state 81
+    CPN            go to state 82
+    FUNC_INV       go to state 83
+    FUNCID         go to state 84
+    COND           go to state 85
+    WHILE          go to state 86
+    CONTROLWHILE   go to state 87
+    FOR            go to state 88
+    FORINITIALIZE  go to state 89
+    RETURN         go to state 90
+
+
+State 188
+
+  105 FOR: FORINITIALIZE KWdo STMT KWend . KWdo
+
+    KWdo  shift, and go to state 200
+
+
+State 189
+
+  106 FORINITIALIZE: KWfor id assign Lint KWto . Lint
+
+    Lint  shift, and go to state 201
+
+
+State 190
+
+  102 COND: KWif CONDBE KWthen STMT KWend . KWif
+
+    KWif  shift, and go to state 202
+
+
+State 191
+
+   96 COND: KWif CONDBE KWthen CONDSTMT KWelse . STMT KWend KWif
+
+    $default  reduce using rule 48 (STMT)
+
+    STMT  go to state 203
+
+
+State 192
+
+   60 LE: LE . '*' LE
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   63   | LE '+' LE .
+   64   | LE . '-' LE
+
+    '*'  shift, and go to state 180
+    '/'  shift, and go to state 181
+    mod  shift, and go to state 182
+
+    $default  reduce using rule 63 (LE)
+
+
+State 193
+
+   60 LE: LE . '*' LE
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+   64   | LE '-' LE .
+
+    '*'  shift, and go to state 180
+    '/'  shift, and go to state 181
+    mod  shift, and go to state 182
+
+    $default  reduce using rule 64 (LE)
+
+
+State 194
+
+   60 LE: LE . '*' LE
+   60   | LE '*' LE .
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+
+    $default  reduce using rule 60 (LE)
+
+
+State 195
+
+   60 LE: LE . '*' LE
+   61   | LE . '/' LE
+   61   | LE '/' LE .
+   62   | LE . mod LE
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+
+    $default  reduce using rule 61 (LE)
+
+
+State 196
+
+   60 LE: LE . '*' LE
+   61   | LE . '/' LE
+   62   | LE . mod LE
+   62   | LE mod LE .
+   63   | LE . '+' LE
+   64   | LE . '-' LE
+
+    $default  reduce using rule 62 (LE)
+
+
+State 197
+
+   58 REF: REF '[' LE ']' .
+
+    $default  reduce using rule 58 (REF)
+
+
+State 198
+
+   70 E: E . '*' E
+   71  | E . '/' E
+   72  | E . mod E
+   73  | E . '+' E
+   74  | E . '-' E
+   75 BE: E . '<' E
+   76   | E . lte E
+   77   | E . '=' E
+   78   | E . gte E
+   79   | E . '>' E
+   80   | E . gl E
+   82   | E . and E
+   83   | E . or E
+   95 MORE_E: MORE_E ',' E .
+
+    '+'  shift, and go to state 114
+    '-'  shift, and go to state 115
+    '*'  shift, and go to state 116
+    '/'  shift, and go to state 117
+    mod  shift, and go to state 118
+    '>'  shift, and go to state 119
+    '='  shift, and go to state 120
+    and  shift, and go to state 121
+    or   shift, and go to state 122
+    '<'  shift, and go to state 123
+    lte  shift, and go to state 124
+    gte  shift, and go to state 125
+    gl   shift, and go to state 126
+
+    $default  reduce using rule 95 (MORE_E)
+
+
+State 199
+
+  103 WHILE: CONTROLWHILE CONDBE KWdo STMT KWend . KWdo
+
+    KWdo  shift, and go to state 204
+
+
+State 200
+
+  105 FOR: FORINITIALIZE KWdo STMT KWend KWdo .
+
+    $default  reduce using rule 105 (FOR)
+
+
+State 201
+
+  106 FORINITIALIZE: KWfor id assign Lint KWto Lint .
+
+    $default  reduce using rule 106 (FORINITIALIZE)
+
+
+State 202
+
+  102 COND: KWif CONDBE KWthen STMT KWend KWif .
+
+    $default  reduce using rule 102 (COND)
+
+
+State 203
+
+   41 STMT: STMT . COMP
+   42     | STMT . SIMPLE
+   43     | STMT . E ';'
+   44     | STMT . COND
+   45     | STMT . WHILE
+   46     | STMT . FOR
+   47     | STMT . RETURN
+   96 COND: KWif CONDBE KWthen CONDSTMT KWelse STMT . KWend KWif
+
+    '('       shift, and go to state 64
+    '-'       shift, and go to state 65
+    not       shift, and go to state 66
+    KWbegin   shift, and go to state 19
+    KWprint   shift, and go to state 67
+    KWend     shift, and go to state 205
+    KWfalse   shift, and go to state 28
+    KWfor     shift, and go to state 69
+    KWif      shift, and go to state 70
+    KWread    shift, and go to state 71
+    KWtrue    shift, and go to state 30
+    KWreturn  shift, and go to state 72
+    KWwhile   shift, and go to state 73
+    id        shift, and go to state 74
+    Lstring   shift, and go to state 31
+    Lreal     shift, and go to state 32
+    Lint      shift, and go to state 33
+
+    L_CONSTANT     go to state 75
+    L_BOOL         go to state 38
+    COMPBEGIN      go to state 20
+    COMP           go to state 76
+    SIMPLE         go to state 77
+    PRINTCODE      go to state 78
+    VAR_REF        go to state 79
+    E              go to state 80
+    BE             go to state 81
+    CPN            go to state 82
+    FUNC_INV       go to state 83
+    FUNCID         go to state 84
+    COND           go to state 85
+    WHILE          go to state 86
+    CONTROLWHILE   go to state 87
+    FOR            go to state 88
+    FORINITIALIZE  go to state 89
+    RETURN         go to state 90
+
+
+State 204
+
+  103 WHILE: CONTROLWHILE CONDBE KWdo STMT KWend KWdo .
+
+    $default  reduce using rule 103 (WHILE)
+
+
+State 205
+
+   96 COND: KWif CONDBE KWthen CONDSTMT KWelse STMT KWend . KWif
+
+    KWif  shift, and go to state 206
+
+
+State 206
+
+   96 COND: KWif CONDBE KWthen CONDSTMT KWelse STMT KWend KWif .
+
+    $default  reduce using rule 96 (COND)
