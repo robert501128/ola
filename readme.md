@@ -1,7 +1,7 @@
 # One Line Art
-In this project we build our own programming language - OLA(OneLineArt), which uses text faces, e.g.,  , as tokens.
+In this project we build our own programming language - OLA(OneLineArt), which uses text faces as tokens, e.g., "｡◕‿◕｡", " "
 
-![OLA] (https://github.com/robert501128/ola/master/snapshot.png)
+![OLA] (https://github.com/robert501128/ola/blob/master/snapshot.png)
 
 ## Work
 
