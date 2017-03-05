@@ -5,9 +5,10 @@ In this project we build our own programming language - OLA(OneLineArt), which u
 
 ## Usage
 ```
-$ ~/Users/Frank/Documents/UCSC/CMPS_203/OLA/0111014 make
-$ ~/Users/Frank/Documents/UCSC/CMPS_203/OLA/0111014 ./parser simplexpr.p
-$ ~/Users/Frank/Documents/UCSC/CMPS_203/OLA/0111014 java -jar jasmin-2.4/jasmin.jar simplexpr.j
+[comment]: # (comment test)
+$ ola/ola_site/ola_compiler/ make
+$ ola/ola_site/ola_compiler/ ./parser simplexpr.p
+$ ola/ola_site/ola_compiler/ java -jar jasmin-2.4/jasmin.jar simplexpr.j
 ```
 ## Work
 
