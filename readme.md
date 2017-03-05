@@ -11,6 +11,7 @@ Compiler is in ola/ola_site/ola_compiler
 $ ola/ola_site/ola_compiler/ make
 $ ola/ola_site/ola_compiler/ ./parser simplexpr.p
 $ ola/ola_site/ola_compiler/ java -jar jasmin-2.4/jasmin.jar simplexpr.j
+$ ola/ola_site/ola_compiler/ java simplexpr
 ```
 ## Work
 
