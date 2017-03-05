@@ -9,4 +9,3 @@ In this project we build our own programming language - OLA(OneLineArt), which u
 - compiler is in ola_site/ola_compiler  
 
 ## [Demo] (http://one-line-art.hk3msckhfw.us-west-2.elasticbeanstalk.com/index/)
-- [One Line Art] (http://one-line-art.hk3msckhfw.us-west-2.elasticbeanstalk.com/index/)
