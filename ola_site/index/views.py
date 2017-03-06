@@ -6,6 +6,18 @@ curdir = os.getcwd()
 # Create your views here.
 def hello_world(request):
 	os.chdir(curdir + "/ola_compiler")
+	fread = open('dema.p', 'r')
+	dema = fread.read()
+	input1 = dema[7:-26]
+	fread = open('demb.p', 'r')
+	demb = fread.read()
+	input2 = demb[7:-26]
+	fread = open('demc.p', 'r')
+	demc = fread.read()
+	input3 = demc[7:-26]
+	fread = open('demd.p', 'r')
+	demd = fread.read()
+	input4 = demd[7:-26]
 	if "code" in request.POST:
 		input = request.POST['code'].encode('utf8')
 		x = 'demo\xca\x96\n'
@@ -14,18 +26,15 @@ def hello_world(request):
 		f = open('demo.p', 'w')
 		f.write(demo)
 		f.close()
+
 		p = subprocess.Popen('./parser demo.p', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.read()
-		print p
-		
 		if not p.strip():
-			subprocess.Popen('java -jar jasmin-2.4/jasmin.jar demo.j', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-			res = subprocess.Popen('java demo', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.read()
-			return render(request, 'index.html', {'result': res, 'input': input})
+			res = subprocess.Popen('java -jar jasmin-2.4/jasmin.jar demo.j;java demo', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout
+			res.readline()
+			return render(request, 'index.html', {'result': res.read(), 'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
 		else:
-			return render(request, 'index.html', {'result':p, 'input': input})
-	fread = open('demo.p', 'r')
-	demo = fread.read()
-	input = demo[7:-26]
-	return render(request, 'index.html', {'input': input})
+			return render(request, 'index.html', {'result':p, 'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
+	input = input1
+	return render(request, 'index.html', {'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
 
 	
