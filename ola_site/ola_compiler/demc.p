@@ -1,40 +1,18 @@
 demcʖ
+//This is a simple classifier to determine whether you can find a girlfriend (boyfriend)
 (´･ω･)o━━
-fun();
-begin
-        // do nothing
-end
-end fun
-
-square( a: real ): real;
-begin
-        return a*a;
-end
-end square
-
-printSeperator();
-begin
-        print "--------------------\n";
-end
-end printSeperator
-
-begin
-        var r: real;
-
-        // read a real
-        read r;
-
-        printSeperator();
-        fun();
-        print square(r);
-		print "\n";
-        printSeperator();
-        fun();
-        fun();
-end
 
 
-
-
+GirlFriendᖘᖗʖ
+(´･ω･)o━━
+	// do nothing
 ━━o(･ω･｀)
+━━o(･ω･｀) GirlFriend
+
+
+(´･ω･)o━━
+        Girlfriend();
+	
+━━o(･ω･｀)
+
 ━━o(･ω･｀) demc
