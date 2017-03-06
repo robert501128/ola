@@ -3,7 +3,7 @@ dembʖ
  * This is a grader for CMPS203 written in OLA
  */
 (´･ω･)o━━
-        (=ↀωↀ=) AttendanceRateゝ HoursOnProjectゝ ProjectCreativityゝ HowGoodAreProfessorAndTAつ( ´(00)`)ʖ
+        (=ↀωↀ=) AttendanceRateゝ HoursOnProjectゝ ProjectCreativityゝ HowGoodAreProfessorAndTAゝscoreつ( ´(00)`)ʖ
         
         AttendanceRate ☜( ﾟ∀ﾟ☜) 0.8ʖ
         HoursOnProject ☜( ﾟ∀ﾟ☜) 40ʖ
@@ -18,6 +18,6 @@ dembʖ
         ⚆ _ ⚆
                 ಠ_ಠ "You didn't work hard enough. You guys should be failed."ʖ
         ━━o(･ω･｀) ʘ‿ʘ
-                
 ━━o(･ω･｀)
 demb
+
