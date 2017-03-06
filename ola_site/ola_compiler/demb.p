@@ -4,11 +4,14 @@ dembʖ
  */
 (´･ω･)o━━
         (=ↀωↀ=) AttendanceRateゝ HoursOnProjectゝ ProjectCreativityゝ HowGoodAreProfessorAndTAゝscoreつ( ´(00)`)ʖ
-        
-        AttendanceRate ☜( ﾟ∀ﾟ☜) 0.8ʖ
-        HoursOnProject ☜( ﾟ∀ﾟ☜) 40ʖ
-        ProjectCreativity ☜( ﾟ∀ﾟ☜) 0.99ʖ
-        HowGoodAreProfessorAndTA ☜( ﾟ∀ﾟ☜) 9999ʖ
+        //0.8ʖ
+        AttendanceRate ☜( ﾟ∀ﾟ☜) 
+        //40ʖ
+        HoursOnProject ☜( ﾟ∀ﾟ☜) 
+        //0.99ʖ
+        ProjectCreativity ☜( ﾟ∀ﾟ☜) 
+        //9999ʖ
+        HowGoodAreProfessorAndTA ☜( ﾟ∀ﾟ☜) 
         
         score ☜( ﾟ∀ﾟ☜) AttendanceRate└|∵┌|0.25┏(＾0＾)┛HoursOnProject└|∵┌|40└|∵┌|0.25┏(＾0＾)┛ProjectCreativity└|∵┌|0.25┏(＾0＾)┛HowGoodAreProfessorAndTA└|∵┌|10000└|∵┌|0.25ʖ
         
