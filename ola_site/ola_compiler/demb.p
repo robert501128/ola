@@ -17,6 +17,6 @@ dembʖ
                 ಠ_ಠ "You guys did so well! TA should give you A+!"ʖ
                 ಠ_ಠ "\n"ʖ        
         ⚆ _ ⚆
-                ಠ_ಠ "You didn't work hard enough. You guys should be failed."ʖ
+                ಠ_ಠ "You guys are not hardworking enough. You should be failed."ʖ
         ━━o(･ω･｀) ʘ‿ʘ
 ━━o(･ω･｀) demb
