@@ -19,6 +19,4 @@ dembʖ
         ⚆ _ ⚆
                 ಠ_ಠ "You didn't work hard enough. You guys should be failed."ʖ
         ━━o(･ω･｀) ʘ‿ʘ
-━━o(･ω･｀)
-demb
-
+━━o(･ω･｀) demb
