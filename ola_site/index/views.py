@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*- 
 from django.shortcuts import render
 import subprocess
 import os
@@ -7,26 +9,26 @@ curdir = os.getcwd()
 def hello_world(request):
 	os.chdir(curdir + "/ola_compiler")
 	fread = open('dema.p', 'r')
-	dema = fread.read()
-	input1 = dema[7:-26]
-	fread = open('demb.p', 'r')
-	demb = fread.read()
-	input2 = demb[7:-26]
-	fread = open('demc.p', 'r')
-	demc = fread.read()
-	input3 = demc[7:-26]
-	fread = open('demd.p', 'r')
-	demd = fread.read()
-	input4 = demd[7:-26]
+	dema = fread.read().decode('utf8')
+	input1 = dema[6:-15]
+	fread1 = open('demb.p', 'r')
+	demb = fread1.read().decode('utf8')
+	input2 = demb[6:-15]
+	fread2 = open('demc.p', 'r')
+	demc = fread2.read().decode('utf8')
+	input3 = demc[6:-15]
+	fread3 = open('demd.p', 'r')
+	demd = fread3.read().decode('utf8')
+	input4 = demd[6:-15]
 	if "code" in request.POST:
-		input = request.POST['code'].encode('utf8')
-		x = 'demo\xca\x96\n'
-		y = '\n\xe2\x94\x81\xe2\x94\x81o(\xef\xbd\xa5\xcf\x89\xef\xbd\xa5\xef\xbd\x80) demo'
+		input = request.POST['code']
+		x = u'demoʖ\n'
+		y = u'\n━━o(･ω･｀) demo'
 		demo = x + input + y
 		f = open('demo.p', 'w')
-		f.write(demo)
+		f.write(demo.encode('utf8'))
 		f.close()
-
+		print open('demo.p', 'r').read()
 		p = subprocess.Popen('./parser demo.p', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.read()
 		if not p.strip():
 			res = subprocess.Popen('java -jar jasmin-2.4/jasmin.jar demo.j;java demo', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout
