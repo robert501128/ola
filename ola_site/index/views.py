@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*- 
 from django.shortcuts import render
 import subprocess
+from pipes import quote
+from pexpect import run
 import os
 
 curdir = os.getcwd()
@@ -28,14 +30,13 @@ def hello_world(request):
 		f = open('demo.p', 'w')
 		f.write(demo.encode('utf8'))
 		f.close()
-		print open('demo.p', 'r').read()
-		p = subprocess.Popen('./parser demo.p', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout.read()
-		if not p.strip():
+		out, returncode = run("sh -c " + quote('./parser demo.p'), withexitstatus=1)
+		if not out.strip():
 			res = subprocess.Popen('java -jar jasmin-2.4/jasmin.jar demo.j;java demo', shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT).stdout
 			res.readline()
 			return render(request, 'index.html', {'result': res.read(), 'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
 		else:
-			return render(request, 'index.html', {'result':p, 'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
+			return render(request, 'index.html', {'result':out, 'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
 	input = input1
 	return render(request, 'index.html', {'input': input, 'input1': input1, 'input2': input2, 'input3': input3, 'input4': input4})
 
