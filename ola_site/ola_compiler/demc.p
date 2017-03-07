@@ -1,5 +1,5 @@
 demcʖ
-//This is a simple classifier to determine whether you can find a girlfriend (boyfriend)
+//This is a simple program to demonstrate procedure call
 (´･ω･)o━━
 	GirlFriendᖘᖗʖ
 	(´･ω･)o━━
