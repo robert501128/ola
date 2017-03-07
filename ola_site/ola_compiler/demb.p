@@ -19,4 +19,5 @@ dembʖ
         ⚆ _ ⚆
                 ಠ_ಠ "You guys are not hardworking enough. You should be failed."ʖ
         ━━o(･ω･｀) ʘ‿ʘ
+━━o(･ω･｀)
 ━━o(･ω･｀) demb
