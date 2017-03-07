@@ -1,17 +1,15 @@
 dembʖ
-/**
- * This is a grader for CMPS203 written in OLA
- */
+// This is a grader for CMPS203 written in OLA
 (´･ω･)o━━
         (=ↀωↀ=) AttendanceRateゝ HoursOnProjectゝ ProjectCreativityゝ HowGoodAreProfessorAndTAゝscoreつ( ´(00)`)ʖ
-        //0.8ʖ
-        AttendanceRate ☜( ﾟ∀ﾟ☜) 
-        //40ʖ
-        HoursOnProject ☜( ﾟ∀ﾟ☜) 
-        //0.99ʖ
-        ProjectCreativity ☜( ﾟ∀ﾟ☜) 
-        //9999ʖ
-        HowGoodAreProfessorAndTA ☜( ﾟ∀ﾟ☜) 
+        //0-1
+        AttendanceRate ☜( ﾟ∀ﾟ☜) ʖ
+        //0-40
+        HoursOnProject ☜( ﾟ∀ﾟ☜) ʖ
+        //0-0.99
+        ProjectCreativity ☜( ﾟ∀ﾟ☜) ʖ
+        //0-9999
+        HowGoodAreProfessorAndTA ☜( ﾟ∀ﾟ☜) ʖ
         
         score ☜( ﾟ∀ﾟ☜) AttendanceRate└|∵┌|0.25┏(＾0＾)┛HoursOnProject└|∵┌|40└|∵┌|0.25┏(＾0＾)┛ProjectCreativity└|∵┌|0.25┏(＾0＾)┛HowGoodAreProfessorAndTA└|∵┌|10000└|∵┌|0.25ʖ
         
