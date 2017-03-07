@@ -9,7 +9,7 @@ demcʖ
 
 	// main
 	(´･ω･)o━━
-		Girlfriend();
+		Girlfriendᖘᖗʖ
 
 	━━o(･ω･｀)
 	
