@@ -3,7 +3,7 @@ demcʖ
 (´･ω･)o━━
 	GirlFriendᖘᖗʖ
 	(´･ω･)o━━
-		// do nothing
+		ಠ_ಠ "I am your girlfriend."ʖ
 	━━o(･ω･｀)
 	━━o(･ω･｀) GirlFriend
 
