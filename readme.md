@@ -1,4 +1,4 @@
-# One Line Art
+# OneLineArt
 In this project we build our own programming language - OLA(OneLineArt), which has the similar syxtax to Pascal, while we uses text faces as tokens, e.g., "｡◕‿◕｡".
 
 ![OLA] (https://github.com/robert501128/ola/blob/master/snapshot.png)
